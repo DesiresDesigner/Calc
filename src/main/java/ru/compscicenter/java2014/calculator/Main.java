@@ -5,7 +5,7 @@ package ru.compscicenter.java2014.calculator;
  */
 public class Main {
     static public void main(String args[]) throws Exception{
-        myCalculator calc = new myCalculator("8+9-10");
+        myCalculator calc = new myCalculator("18 + 2*2*2 - 12/2");
 
         System.out.println(calc.calculate());
     }

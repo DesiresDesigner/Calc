@@ -11,11 +11,13 @@ public class myCalculator {//implements Calculator {
     private String expression;
 
     myCalculator(String expression){
-        this.expression = expression;
+        this.expression = expression.replaceAll(" ", "");
 
         mathLiterals = new ArrayList<String>();
         mathLiterals.add("+");
         mathLiterals.add("-");
+        mathLiterals.add("*");
+        mathLiterals.add("/");
     }
 
     public double calculate() throws Exception {
@@ -23,14 +25,7 @@ public class myCalculator {//implements Calculator {
     }
 
     private double count() throws Exception {
-        double res = 0;
-        String currentLiteral = getNextLiteral();
-
-        if (currentLiteral.equals("sin")){
-            // TODO
-        } else {
-            res += Double.valueOf(currentLiteral);
-        }
+        double res = getNumberFromLiteral(getNextLiteral());
 
         while (currentIndex != expression.length()){
             String operation = getNextLiteral();
@@ -38,6 +33,11 @@ public class myCalculator {//implements Calculator {
                 res += count();
             else if (operation.equals("-"))
                 res -= count();
+            else if (operation.equals("*")){
+                res *= getNumberFromLiteral(getNextLiteral());
+            } else if (operation.equals("/")){
+                res /= getNumberFromLiteral(getNextLiteral());
+            }
             else
                 throw new Exception("Wrong operation");
         }
@@ -54,7 +54,7 @@ public class myCalculator {//implements Calculator {
             ++currentIndex;
             return literal;
         }
-        
+
         ++currentIndex;
         while (currentIndex < expression.length() && !mathLiterals.contains(String.valueOf(expression.charAt(currentIndex)))){
             literal += String.valueOf(expression.charAt(currentIndex));
@@ -62,5 +62,12 @@ public class myCalculator {//implements Calculator {
         }
 
         return literal;
+    }
+
+    private double getNumberFromLiteral(String literal){
+        /*if (literal.equals("sin")){
+            //TODO
+        }*/
+        return Double.valueOf(literal);
     }
 }
