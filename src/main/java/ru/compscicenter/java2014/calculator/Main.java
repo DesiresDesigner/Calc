@@ -5,8 +5,12 @@ package ru.compscicenter.java2014.calculator;
  */
 public class Main {
     static public void main(String args[]) throws Exception{
-        myCalculator calc = new myCalculator("18 + 2*2*2 - 12/2");
+        MyCalculator calc = new MyCalculator(" -abs(1E+1^2 + 20/ 2)");
 
         System.out.println(calc.calculate());
+
+        //System.out.println(Double.valueOf("1E-1"));
+
+
     }
 }
